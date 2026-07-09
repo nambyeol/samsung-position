@@ -39,6 +39,7 @@
   .prow .pv b{color:var(--ink);font-weight:700;}
 
   .rule{height:2px;background:var(--line2);margin:40px 0 4px;}
+  .mhint{display:none;font-weight:500;letter-spacing:0;text-transform:none;}
 
   .item{padding:28px 0;border-bottom:1px solid var(--line);}
   .qhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
@@ -130,6 +131,7 @@
     .vtab.wide td:first-child,.vtab.wide th:first-child{min-width:96px;}
     .vbtn{width:100%;padding:11px 0;font-size:12px;}
     .verify.open .vpanel{max-height:none;}
+    .mhint{display:inline;}
     .vscen li{font-size:12.5px;}
     .vjudge,.vrisk{font-size:13px;}
     .close{padding:18px 16px;}
@@ -412,7 +414,7 @@
       </table>
       <div class="vsrc">현재가 272,750원(2026-07-09) 기준 · 목표가 밴드 21만~85만원</div>
 
-      <div class="vsub">2028까지 체크리스트 <span style="font-weight:500;letter-spacing:0;text-transform:none;">(모바일: 옆으로 밀어서 보기)</span></div>
+      <div class="vsub">2028까지 체크리스트 <span class="mhint">(옆으로 밀어서 보기)</span></div>
       <table class="vtab wide">
         <tr><th>추적 지표 (KQ)</th><th class="ok">청신호 = 포지션 유지</th><th class="risk">적신호 = 재검토</th></tr>
         <tr><td>캐펙스·재고 (KQ1)</td><td>하이퍼스케일러 캐펙스 가이던스 상향, 재고 5주 이내</td><td>1곳이라도 캐펙스 하향, 재고 10주 초과</td></tr>
