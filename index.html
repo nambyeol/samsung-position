@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Key Questions & First Answers — 삼성전자 시총 포지션</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --ink:#111114; --sub:#3f3f45; --muted:#8a8a90;
+    --line:#e3e3e0; --line2:#111114; --paper:#ffffff; --bg:#f2f2f0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg);color:var(--ink);letter-spacing:-.01em;
+    font-family:"Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,sans-serif;
+    -webkit-font-smoothing:antialiased;padding:56px 20px;
+  }
+  .doc{max-width:840px;margin:0 auto;background:var(--paper);padding:66px 68px 74px;
+       box-shadow:0 12px 40px rgba(0,0,0,.08);border:1px solid #ececea;}
+
+  .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:700;}
+  h1{font-size:29px;font-weight:800;line-height:1.3;letter-spacing:-.02em;margin-top:14px;}
+
+  .hypo{margin-top:24px;padding:20px 24px;background:#fafafa;border:1px solid var(--line);border-left:3px solid var(--ink);}
+  .hypo .l{font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);}
+  .hypo p{font-size:16px;font-weight:600;line-height:1.55;margin-top:7px;color:var(--ink);}
+
+  /* 우선순위 요약 */
+  .prio{margin-top:18px;padding:20px 24px;border:1px solid var(--line);border-radius:2px;background:#fff;}
+  .prio .l{font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+  .prow{display:flex;gap:14px;font-size:14px;line-height:1.5;padding:7px 0;border-top:1px solid var(--line);}
+  .prow:first-of-type{border-top:none;}
+  .prow .pk{min-width:78px;font-weight:800;color:var(--ink);}
+  .prow .pk.up{color:#1f7d4d;} .prow .pk.br{color:#b23b3b;}
+  .prow .pv{color:var(--sub);font-weight:500;}
+  .prow .pv b{color:var(--ink);font-weight:700;}
+
+  .rule{height:2px;background:var(--line2);margin:40px 0 4px;}
+
+  .item{padding:28px 0;border-bottom:1px solid var(--line);}
+  .qhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+  .qn{font-size:13px;font-weight:800;color:var(--ink);letter-spacing:.03em;min-width:46px;}
+  .q{font-size:18px;font-weight:700;line-height:1.42;letter-spacing:-.02em;flex:1;min-width:60%;}
+  .role{font-size:10.5px;font-weight:800;letter-spacing:.03em;padding:4px 10px;border-radius:20px;white-space:nowrap;align-self:center;}
+  .role.up{color:#1f7d4d;background:#eff7f2;border:1px solid #bfe0cd;}
+  .role.br{color:#b23b3b;background:#fbf1f0;border:1px solid #eccfcf;}
+  .role.sub{color:var(--muted);background:#f4f4f2;border:1px solid var(--line);}
+  .role.key{color:#fff;background:#111;border:1px solid #111;}
+
+  .fa{margin-top:15px;padding-left:60px;}
+  .fa .fl{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+  .fa .ftxt{font-size:16px;line-height:1.6;color:var(--ink);margin-top:6px;font-weight:600;}
+  .fa .ftxt .yes{font-weight:800;border-bottom:2px solid var(--ink);padding-bottom:1px;}
+
+  /* 검증 토글 */
+  .verify{margin-top:14px;padding-left:60px;}
+  .vbtn{display:inline-flex;align-items:center;gap:9px;cursor:pointer;user-select:none;
+        font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+        padding:5px 0;transition:color .12s;}
+  .vbtn:hover{color:var(--ink);}
+  .vbtn .chev{display:inline-block;font-size:9px;transition:transform .2s;}
+  .verify.open .vbtn .chev{transform:rotate(90deg);}
+  .verify.open .vbtn{color:var(--ink);}
+  .vpanel{overflow:hidden;max-height:0;transition:max-height .3s ease;}
+  .verify.open .vpanel{max-height:1600px;}
+
+  .vdetail{margin-top:10px;padding:18px 20px;background:#fafafa;border:1px solid var(--line);border-radius:6px;}
+  .vdetail .vconc{font-size:14.5px;line-height:1.6;color:var(--ink);font-weight:600;}
+  .vdetail .vconc b{font-weight:800;}
+  .vdetail .vsub{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:18px 0 8px;}
+  .vtab{width:100%;border-collapse:collapse;font-size:13px;}
+  .vtab th,.vtab td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45;}
+  .vtab th{font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:700;}
+  .vtab td:first-child{font-weight:700;color:var(--ink);white-space:nowrap;}
+  .vtab .ok{font-weight:800;color:#1f7d4d;white-space:nowrap;}
+  .vtab .mid{font-weight:800;color:#b8863b;white-space:nowrap;}
+  .vtab .risk{font-weight:800;color:#b23b3b;white-space:nowrap;}
+  .vrisk{margin-top:14px;font-size:13.5px;line-height:1.55;color:var(--sub);font-weight:500;}
+  .vrisk b{color:#b23b3b;font-weight:800;}
+  .vscen{list-style:none;margin:0;}
+  .vscen li{font-size:13.5px;line-height:1.55;color:var(--sub);padding:7px 0;border-bottom:1px solid var(--line);font-weight:500;}
+  .vscen li:last-child{border-bottom:none;}
+  .vscen li b{color:var(--ink);font-weight:800;}
+  .vjudge{margin-top:16px;padding:13px 16px;background:#fff;border:1px solid var(--line);border-left:3px solid var(--ink);border-radius:0 5px 5px 0;font-size:14px;line-height:1.6;color:var(--ink);font-weight:600;}
+  .vjudge b{font-weight:800;}
+  .vsrc{margin-top:12px;font-size:12px;color:var(--muted);font-weight:500;}
+
+  .close{margin-top:36px;padding:22px 24px;background:var(--ink);color:#fff;}
+  .close .l{font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#b9b9bf;}
+  .close p{font-size:15.5px;font-weight:600;line-height:1.62;margin-top:9px;color:#fff;}
+  .close p em{font-style:normal;text-decoration:underline;text-underline-offset:3px;}
+
+  /* 편집 UI */
+  [contenteditable="true"]{border-radius:3px;transition:background .12s,outline .12s;}
+  [contenteditable="true"]:hover{outline:1px dashed #bdbdb8;outline-offset:4px;cursor:text;}
+  [contenteditable="true"]:focus{outline:2px solid #111;outline-offset:4px;background:#fffdf0;}
+  .toolbar{position:fixed;top:16px;right:16px;display:flex;gap:8px;z-index:50;}
+  .toolbar button{font-family:inherit;font-size:13px;font-weight:700;padding:10px 15px;border:1.5px solid #111;background:#111;color:#fff;cursor:pointer;border-radius:7px;box-shadow:0 4px 14px rgba(0,0,0,.15);}
+  .toolbar button.ghost{background:#fff;color:#111;}
+  .toolbar button:active{transform:translateY(1px);}
+  .banner{position:fixed;top:16px;left:16px;font-size:12.5px;color:#555;background:#fff;border:1px solid var(--line);border-radius:7px;padding:9px 13px;z-index:50;box-shadow:0 4px 14px rgba(0,0,0,.08);}
+  .toast{position:fixed;top:64px;right:16px;font-size:13px;font-weight:600;color:#fff;background:#1f7d4d;border-radius:7px;padding:11px 16px;z-index:60;opacity:0;transform:translateY(-6px);transition:.2s;box-shadow:0 4px 14px rgba(0,0,0,.2);}
+  .toast.show{opacity:1;transform:translateY(0);}
+  #dump{position:fixed;inset:auto 16px 16px 16px;max-width:840px;margin:0 auto;height:34vh;display:none;z-index:70;
+        font-family:ui-monospace,Menlo,monospace;font-size:12.5px;line-height:1.5;padding:16px;border:2px solid #111;border-radius:8px;background:#fff;box-shadow:0 -8px 30px rgba(0,0,0,.18);}
+
+  @media print{
+    body{background:#fff;padding:0;}
+    .doc{box-shadow:none;max-width:100%;padding:40px 44px;border:none;}
+    .item{page-break-inside:avoid;}
+    .close,.role{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .toolbar,.banner,.toast,#dump{display:none !important;}
+    [contenteditable]{outline:none !important;}
+    .vpanel{max-height:none !important;}
+    .vbtn .chev{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="doc" id="doc">
+
+  <div class="eyebrow">작성자 · 남별</div>
+  <h1>삼성전자 시총 포지션 Key Questions &amp; First Answers</h1>
+
+  <div class="hypo">
+    <div class="l">Position</div>
+    <p>2028 상반기 삼성전자 시가총액은 현재 약 1,970조 대비 커진다.</p>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- 1. HBM 사이클 -->
+  <div class="item">
+    <div class="qhead">
+      <span class="qn">KQ 1</span>
+      <span class="q">HBM/AI 메모리 업사이클이 2028 상반기까지 지속되는가?</span>
+      <span class="role up">상방 엔진</span><span class="role key">결정적</span>
+    </div>
+    <div class="fa"><div class="fl">First Answer</div>
+      <div class="ftxt"><span class="yes">지속된다.</span> 구조적 AI 수요로 슈퍼사이클이 2028 상반기까지 연장된다.</div>
+    </div>
+    <div class="verify">
+      <div class="vbtn" onclick="toggleV(this)"><span class="chev">▶</span><span>검증 결과 · 3대 지표 &amp; 시나리오</span></div>
+      <div class="vpanel"><div class="vdetail">
+        <div class="vconc"><b>결론 —</b> 업사이클 지속 = <b>예.</b> 단 두 층위로 나눠 봐야 한다. <b>절대 수준(가격·타이트니스)</b>은 3대 지표 모두 2028 상반기까지 강세 지속 → 검증 통과. 그러나 <b>변화율(모멘텀)</b>은 이미 2026 중반이 피크(Morgan Stanley "peak rate of change", 7/7 사상 최대 실적에도 주가 급락). “사이클은 살아있으나 가속도는 꺾이는 중.”</div>
+        <div class="vsub">3대 지표 검증</div>
+        <table class="vtab">
+          <tr><th>지표</th><th>현재 값</th><th>판정</th></tr>
+          <tr><td>HBM 가격</td><td>HBM3E 2026 계약가 +20%(~$300/stack), HBM4 mid-$500, 삼성 2026 물량 완판</td><td class="ok">정상</td></tr>
+          <tr><td>재고주수</td><td>2~4주 (경고선 10주의 1/3, 리드타임 30주+)</td><td class="ok">정상</td></tr>
+          <tr><td>하이퍼스케일러 캐펙스</td><td>2026 ~$725B(+77% YoY), 2027 $1T+ 전망, 가이던스 상향 중</td><td class="ok">정상</td></tr>
+        </table>
+        <div class="vsub">시나리오 (→ 2028 상반기)</div>
+        <ul class="vscen">
+          <li><b>보수 30%</b> — 2027 하반기 신규 캐파 램프 + 하이퍼스케일러 1곳 캐펙스 하향 → 2027말~2028초 가격 하락, 업사이클 “2027까지”로 단축</li>
+          <li><b>중립 45% (기본값)</b> — 캐펙스 $1T 돌파하되 증가율 둔화, 재고 5주 이내 → 2028 상반기까지 타이트 유지·모멘텀 둔화, 가격 고점 횡보</li>
+          <li><b>낙관 25%</b> — 수요가 신규 공급 계속 초과 + 캐펙스 재상향 → 2028 하반기까지 연장</li>
+        </ul>
+        <div class="vjudge"><b>판단 —</b> 중립 시나리오 기준 <b>예</b> (모멘텀 피크는 지났다는 전제). 선행 킬 스위치는 <b>캐펙스 하나</b> — 가격·재고는 후행/동행 지표라 꺾이면 이미 늦다. Q2 어닝 하이퍼스케일러 가이던스가 분기점.</div>
+        <div class="vsrc">출처 9건 — TrendForce · KED Global · Morgan Stanley · Tom's Hardware · Blocks &amp; Files 외 (작성 기준일 2026-07-09)</div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- 2. HBM4 점유율 -->
+  <div class="item">
+    <div class="qhead">
+      <span class="qn">KQ 2</span>
+      <span class="q">삼성이 HBM4 퀄을 통과하고 SK하이닉스와 격차를 좁히는가?</span>
+      <span class="role up">상방 엔진</span><span class="role key">결정적</span>
+    </div>
+    <div class="fa"><div class="fl">First Answer</div>
+      <div class="ftxt"><span class="yes">좁힌다.</span> HBM3E 엔비디아 퀄 통과를 발판으로 HBM4에서 점유율을 회복한다.</div>
+    </div>
+    <div class="verify">
+      <div class="vbtn" onclick="toggleV(this)"><span class="chev">▶</span><span>검증 결과 · HBM4 추격 현황</span></div>
+      <div class="vpanel"><div class="vdetail">
+        <div class="vconc"><b>결론 —</b> 방향은 <b>추격 중</b>이 맞지만 아직 “역전”은 아니다. 삼성은 진입장벽(엔비디아 납품 자격)은 넘었으나, <b>실제 점유율은 여전히 3위</b>. “완판”은 계약 물량이지 점유율 회복의 확정이 아니다.</div>
+        <div class="vsub">핵심 근거</div>
+        <table class="vtab">
+          <tr><th>항목</th><th>내용 (수치·출처)</th><th>판정</th></tr>
+          <tr><td>납품 자격</td><td>HBM3E 12단 엔비디아 퀄 통과(2025.9), 3번째 공급사로 납품 개시 (KED Global)</td><td class="ok">통과</td></tr>
+          <tr><td>HBM4 준비</td><td>내부 퀄 완료, 2026 물량 선주문 완판 (KED Global)</td><td class="mid">진행</td></tr>
+          <tr><td>미래 전망</td><td>UBS “2027년 SK하이닉스와 점유율 동률(각 ~40%)”, 출하 +137% 상향 (investing.com)</td><td class="mid">낙관치</td></tr>
+          <tr><td>현재 실적</td><td>실제 점유율 SK 62% · 마이크론 21% · <b>삼성 17%(3위, 마이크론에 추월당함)</b> (astutegroup)</td><td class="risk">열위</td></tr>
+        </table>
+        <div class="vrisk"><b>리스크 —</b> UBS 동률 전망은 낙관 아웃라이어이며, 현재 데이터는 3위. 엔비디아 HBM4 <b>최종 퀄 미확정</b> 상태이고, “완판=주문”이라 실제 출하로 이어질지는 별개다.</div>
+        <div class="vjudge"><b>판단 —</b> 포지션이 이기려면 “실제 출하 점유율의 반등”이 나와야 한다. 지금은 <b>방향만 확인</b>됐고, 확정 신호는 두 가지 — ① 엔비디아 HBM4 최종 퀄 통과, ② 분기 점유율의 실제 반등. KQ1과 함께 <b>가장 먼저 지켜볼 결정적 변수</b>.</div>
+        <div class="vsrc">출처 — KED Global · UBS(investing.com) · Astute Group</div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- 3. 고점·주가 선행 하락 -->
+  <div class="item">
+    <div class="qhead">
+      <span class="qn">KQ 3</span>
+      <span class="q">현재가 이미 고점이거나, 하방 리스크가 포지션을 무너뜨리는가?</span>
+      <span class="role br">브레이크</span><span class="role key">최대 약점</span>
+    </div>
+    <div class="fa"><div class="fl">First Answer</div>
+      <div class="ftxt"><span class="yes">아니다.</span> 지금은 고점이 아니라 구조적 상승의 초입이며, 하방 리스크는 관리 가능하다.</div>
+    </div>
+    <div class="verify">
+      <div class="vbtn" onclick="toggleV(this)"><span class="chev">▶</span><span>검증 결과 · 고점·하방 리스크</span></div>
+      <div class="vpanel"><div class="vdetail">
+        <div class="vconc"><b>결론 —</b> <b>반증 리스크가 실재한다.</b> 현재 주가가 이미 상승을 상당 부분 선반영했고, 메모리 주가는 이익 정점을 <b>앞질러(선행) 빠지는</b> 특성이 있다. 이 KQ가 포지션의 <b>최대 약점</b>이다.</div>
+        <div class="vsub">핵심 근거</div>
+        <table class="vtab">
+          <tr><th>항목</th><th>내용 (수치·출처)</th><th>판정</th></tr>
+          <tr><td>선반영</td><td>현재 시총이 Forward PER 5.7배 — 이익 회복을 이미 가격에 반영</td><td class="risk">부담</td></tr>
+          <tr><td>주가 선행성</td><td>메모리 주가는 이익 피크를 <b>6~12개월 선행</b>해 디레이팅 (사이클 특성)</td><td class="risk">주의</td></tr>
+          <tr><td>실제 신호</td><td>2026.7.7 <b>사상 최대 실적에도 주가 급락</b> — “좋은 뉴스가 안 먹히는” 국면 (Seoul Economic Daily)</td><td class="risk">경고</td></tr>
+          <tr><td>꼬리 위험</td><td>AI 캐펙스 조정 · HBM4 재실패 · 미중 지정학</td><td class="mid">상존</td></tr>
+        </table>
+        <div class="vrisk"><b>포지션 방어 논리 —</b> 이것이 “사이클”이 아니라 “구조적 AI 수요”라면 이익의 층위 자체가 올라가고, 완판·공급 결핍은 2027까지 이어진다(→ KQ1 참조). 그렇다면 현재는 고점이 아니라 상승 초입.</div>
+        <div class="vjudge"><b>판단 —</b> “고점이 아니다”를 입증하려면 <b>이익이 2028까지 계속 상향</b>돼야 한다. 그러나 KQ1 검증(모멘텀은 이미 피크)과 <b>긴장 관계</b>에 있다. 결국 포지션의 성패는 “절대 이익 레벨의 유지”가 “주가 선행 하락”을 이기느냐에 달렸다.</div>
+        <div class="vsrc">출처 — Seoul Economic Daily · Morgan Stanley · 세션 종합 분석</div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- 4. 매크로·유동성 (신규) -->
+  <div class="item">
+    <div class="qhead">
+      <span class="qn">KQ 4</span>
+      <span class="q">반도체 모멘텀과 무관하게, ‘국내 시총 1위 + 유동성·인플레이션’ 환경이 삼성 시총을 밀어올리는가?</span>
+      <span class="role up">상방 엔진</span><span class="role key">신규</span>
+    </div>
+    <div class="fa"><div class="fl">First Answer</div>
+      <div class="ftxt"><span class="yes">밀어올린다.</span> 목표가 명목 원화 시총이고, 삼성은 국내 유동성·패시브·외국인 자금의 1차 수혜처이며, 원화 약세가 수출이익까지 더한다.</div>
+    </div>
+    <div class="verify">
+      <div class="vbtn" onclick="toggleV(this)"><span class="chev">▶</span><span>검증 결과 · 비-펀더멘털 상방</span></div>
+      <div class="vpanel"><div class="vdetail">
+        <div class="vconc"><b>결론 —</b> 명목·구조적 <b>순풍은 실재</b>한다. 다만 강한 채널은 “명목 분모 + 원화 약세 + 인덱스 집중”이고, “국내 부양책이 삼성을 직접 매수”는 상대적으로 약하다(삼성의 한계 매수자는 외국인).</div>
+        <div class="vsub">핵심 근거</div>
+        <table class="vtab">
+          <tr><th>채널</th><th>내용</th><th>판정</th></tr>
+          <tr><td>명목 분모</td><td>목표가 <b>명목 원화 시총</b> — 2년 +20%는 화폐가치 하락(인플레)으로도 일부 충족</td><td class="ok">순풍</td></tr>
+          <tr><td>인덱스 집중</td><td>KOSPI 비중 20%+ — 패시브·개인·지수 편입 자금의 <b>1차 저수지</b></td><td class="ok">순풍</td></tr>
+          <tr><td>원화 약세</td><td>유동성 → 원화 약세 → 수출기업 달러매출의 <b>원화 환산 이익 증가</b> (이중 수혜)</td><td class="ok">순풍</td></tr>
+          <tr><td>한계 매수자</td><td>삼성 주가는 국내 유동성보다 <b>외국인·글로벌 반도체 센티</b>에 더 좌우</td><td class="mid">주의</td></tr>
+        </table>
+        <div class="vrisk"><b>리스크 —</b> 정치는 양날의 검 — 밸류업 추진(순풍)일 수도, 증세·지배구조·상법 리스크(역풍)일 수도. 또 국내 유동성은 삼성보다 <b>내수·중소형주로 더 잘 흐른다.</b></div>
+        <div class="vjudge"><b>판단 —</b> 명목 목표선·원화 약세·인덱스 집중은 <b>견고한 순풍</b>이라 포지션에 우호적. 단 “삼성 특정”의 강도는 외국인 흐름에 의존 — 삼성 고유의 힘이라기보다 <b>시장 전체 순풍의 대표 수혜</b> 성격.</div>
+        <div class="vsub">검증 포인트</div>
+        <ul class="vscen">
+          <li>원화 M2·기준금리 경로 · 원/달러 환율(약세=수혜)</li>
+          <li>KOSPI 내 삼성 비중 · 패시브/외국인 순매수 추이</li>
+          <li>CPI·명목 GDP 성장(명목 목표선 자체를 낮춤) · 밸류업 정책의 정치적 추진력</li>
+        </ul>
+        <div class="vsrc">출처 — 세션 종합 분석 (개별 지표 심층 검증 예정)</div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- 5. 밸류 재평가 여력 -->
+  <div class="item">
+    <div class="qhead">
+      <span class="qn">KQ 5</span>
+      <span class="q">현재 PBR·PER에 저평가 여력이 남아 있는가?</span>
+      <span class="role br">브레이크</span>
+    </div>
+    <div class="fa"><div class="fl">First Answer</div>
+      <div class="ftxt"><span class="yes">남아 있다.</span> 이익 3배 국면 대비 배수가 낮아 재평가 여력이 크다.</div>
+    </div>
+    <div class="verify">
+      <div class="vbtn" onclick="toggleV(this)"><span class="chev">▶</span><span>검증 결과 · 저평가 여력</span></div>
+      <div class="vpanel"><div class="vdetail">
+        <div class="vconc"><b>결론 —</b> <b>지표에 따라 답이 갈린다.</b> 이익 대비 배수(PER)로 보면 싸 보이지만, 자산 대비 배수(PBR)로 보면 역사적 고점권이다. 즉 <b>“배수를 더 쳐줄 여력”은 제한적</b>이며, 상승은 배수가 아니라 이익(E)에서 나와야 한다.</div>
+        <div class="vsub">핵심 근거</div>
+        <table class="vtab">
+          <tr><th>지표</th><th>내용 (수치·출처)</th><th>판정</th></tr>
+          <tr><td>PER (이익 대비)</td><td>Forward PER <b>5.7배</b> — 이익 회복을 이미 상당 부분 반영 (FnGuide·stockanalysis)</td><td class="mid">중립</td></tr>
+          <tr><td>PBR (자산 대비)</td><td>약 <b>5배</b> — 역사적 밴드(0.9~3.45배) <b>상단 돌파</b> (GuruFocus)</td><td class="risk">고평가</td></tr>
+          <tr><td>피어 비교</td><td>삼성·SK ~5배, 마이크론 ~10배 (PER 기준으론 상대적으로 저렴)</td><td class="ok">우위</td></tr>
+          <tr><td>이익 레벨</td><td>2026E 순익 135~155조 = 역사적 최대(~55조)의 <b>약 3배</b></td><td class="mid">고점</td></tr>
+        </table>
+        <div class="vrisk"><b>리스크 —</b> PBR 기준으론 이미 비싸다. 이익 3배 추정은 <b>단일 강세 하우스 전망</b>이지 컨센이 아니며, “실적 바닥” 서사(Trailing PER 48배)는 오류로 확인(실제 24~25배, 2026 Q1은 사상 최대 분기).</div>
+        <div class="vjudge"><b>판단 —</b> “PER은 싸다”는 포지션을 지지하지만 “PBR은 비싸다”는 반대로 작용. 종합하면 <b>배수 상승 여력은 크지 않다</b>. 시총 상승의 동력을 배수가 아닌 이익에 걸어야 한다.</div>
+        <div class="vsrc">출처 — FnGuide · stockanalysis · GuruFocus · Eugene/Daishin</div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- 6. 밸류업 촉매 -->
+  <div class="item">
+    <div class="qhead">
+      <span class="qn">KQ 6</span>
+      <span class="q">밸류업·자사주 소각·배당이 재평가 촉매가 되는가?</span>
+      <span class="role sub">보조</span>
+    </div>
+    <div class="fa"><div class="fl">First Answer</div>
+      <div class="ftxt"><span class="yes">된다.</span> 소각·밸류업이 코리아 디스카운트를 해소하며 배수를 끌어올린다.</div>
+    </div>
+    <div class="verify">
+      <div class="vbtn" onclick="toggleV(this)"><span class="chev">▶</span><span>검증 결과 · 재평가 촉매</span></div>
+      <div class="vpanel"><div class="vdetail">
+        <div class="vconc"><b>결론 —</b> 촉매의 힘이 <b>약하다.</b> 자사주 소각은 긍정적이지만, 주주환원 프로그램 자체는 <b>증액 없이 정체</b>여서 밸류(배수)를 끌어올릴 신규 동력이 부족하다.</div>
+        <div class="vsub">핵심 근거</div>
+        <table class="vtab">
+          <tr><th>항목</th><th>내용 (수치·출처)</th><th>판정</th></tr>
+          <tr><td>환원 규모</td><td>주주환원 = FCF의 50%, <b>직전 프로그램과 동일·증액 없음</b> (삼성 뉴스룸)</td><td class="risk">정체</td></tr>
+          <tr><td>배당</td><td>연 정규배당 <b>9.8조원, 3년 연속 동결</b></td><td class="risk">정체</td></tr>
+          <tr><td>소각</td><td>2026.4 약 <b>14.58조원</b> 이익소각, 상반기 16조 규모 소각 결의</td><td class="ok">긍정</td></tr>
+        </table>
+        <div class="vrisk"><b>리스크 —</b> 프로그램이 정체돼 있어 “코리아 디스카운트 해소 → 배수 재평가” 스토리를 밀어줄 힘이 약하다.</div>
+        <div class="vjudge"><b>판단 —</b> 소각은 주당가치(EPS)를 높이지만, 밸류업발 <b>배수 재평가의 동력으로는 부족</b>하다. 포지션을 지지하려면 환원율 증액·정책 강화 같은 추가 촉매가 필요.</div>
+        <div class="vsrc">출처 — 삼성전자 뉴스룸 · 4th.kr · ZDNet</div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- 7. 파운드리 -->
+  <div class="item">
+    <div class="qhead">
+      <span class="qn">KQ 7</span>
+      <span class="q">파운드리·시스템LSI 적자가 축소 또는 흑전되는가?</span>
+      <span class="role sub">보조</span>
+    </div>
+    <div class="fa"><div class="fl">First Answer</div>
+      <div class="ftxt"><span class="yes">개선된다.</span> 대형 수주와 수율 상승으로 적자가 줄며 이익에 플러스로 돌아선다.</div>
+    </div>
+    <div class="verify">
+      <div class="vbtn" onclick="toggleV(this)"><span class="chev">▶</span><span>검증 결과 · 파운드리 흑전 여부</span></div>
+      <div class="vpanel"><div class="vdetail">
+        <div class="vconc"><b>결론 —</b> 개선 <b>방향</b>은 있으나 흑자 전환의 <b>시점·규모는 불확실</b>하다. 이익을 끌어올리는 3대 축 중 <b>가장 약한 고리</b>다.</div>
+        <div class="vsub">핵심 근거</div>
+        <table class="vtab">
+          <tr><th>항목</th><th>내용 (수치·출처)</th><th>판정</th></tr>
+          <tr><td>점유율 격차</td><td>TSMC 71.0% vs <b>삼성 6.8%</b> (2025 Q3, 격차 사상 최대) (businesspost)</td><td class="risk">열위</td></tr>
+          <tr><td>2나노 수율</td><td>자료 상충 — “60% 돌파”(biggo) vs “55% 미달”(TrendForce). TSMC는 70~80%</td><td class="mid">불확실</td></tr>
+          <tr><td>흑전 시점</td><td>“BEP 2027→2026 조기화” 설(epnc) vs “2027 흑전” 설(biggo)</td><td class="mid">엇갈림</td></tr>
+          <tr><td>대형 수주</td><td>테슬라 AI6 $16.5B, 장기계약 22.76조. 단 <b>퀄컴은 TSMC 선택, 애플·엔비디아·AMD 미계약</b></td><td class="mid">일부</td></tr>
+        </table>
+        <div class="vrisk"><b>리스크 —</b> 수율이 양산 기준에 못 미치면 적자 지속. 핵심 대형 고객 미확보이며, <b>수율 1% 변화가 연 수천억~조원 손익</b>을 좌우한다.</div>
+        <div class="vjudge"><b>판단 —</b> 방향은 우호적이나 흑전 타이밍·규모가 불확실해 <b>2028 상반기 이익 기여는 제한적</b>. “발목만 안 잡으면 되는” 요인에 가깝다.</div>
+        <div class="vsrc">출처 — BusinessPost · TrendForce · biggo · epnc</div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- 8. CXMT -->
+  <div class="item">
+    <div class="qhead">
+      <span class="qn">KQ 8</span>
+      <span class="q">중국 CXMT의 공급과잉이 판가를 누르는가?</span>
+      <span class="role sub">보조</span>
+    </div>
+    <div class="fa"><div class="fl">First Answer</div>
+      <div class="ftxt"><span class="yes">제한적이다.</span> HBM에는 무관하고 레거시 압박은 감내 가능한 수준이다.</div>
+    </div>
+    <div class="verify">
+      <div class="vbtn" onclick="toggleV(this)"><span class="chev">▶</span><span>검증 결과 · CXMT 위협 강도</span></div>
+      <div class="vpanel"><div class="vdetail">
+        <div class="vconc"><b>결론 —</b> 위협은 실재하나 <b>2028 상반기까지는 제한적</b>이다. 핵심은 <b>HBM(고부가·삼성 주력)에는 직접 무관</b>하고, 압박은 범용(레거시) DRAM에 국한된다는 점.</div>
+        <div class="vsub">핵심 근거</div>
+        <table class="vtab">
+          <tr><th>항목</th><th>내용 (수치·출처)</th><th>판정</th></tr>
+          <tr><td>성장 속도</td><td>CXMT DRAM 점유율 4%→<b>8%</b>(2026 Q1, 2배), 매출 +156% YoY, 4위 진입 (biggo)</td><td class="risk">위협</td></tr>
+          <tr><td>증설 규모</td><td>DRAM 캐파 350k→500k/월(2028, +42%), HBM 55k→100k/월</td><td class="mid">중장기</td></tr>
+          <tr><td>완화 요인</td><td>덤핑 자제 — 가격이 선두권보다 <b>5~10%만</b> 저렴. DDR5 원가는 <b>30%+ 열위</b></td><td class="ok">방어</td></tr>
+        </table>
+        <div class="vrisk"><b>리스크 —</b> 2028년 증설분이 본격 가동되면 범용 DRAM 판가에 하방 압력. 레거시 비중이 큰 사업 라인일수록 타격.</div>
+        <div class="vjudge"><b>판단 —</b> 최선단·HBM에는 무관하므로 삼성 이익의 핵심 엔진을 흔들지 못한다. 범용 DRAM에 대한 <b>중장기 위협은 맞지만 2028 상반기 시점까진 감내 가능</b>. 포지션 위협도는 낮음.</div>
+        <div class="vsrc">출처 — biggo · useluminix</div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="close">
+    <div class="l">종합 퍼스트 앤서</div>
+    <p>8개 지지 가설이 모두 참이면, 2028 상반기 삼성 시총은 <em>+20% 이상 커진다.</em></p>
+  </div>
+
+  <div class="verify" style="padding-left:0;margin-top:22px;">
+    <div class="vbtn" onclick="toggleV(this)"><span class="chev">▶</span><span>검증 반영 종합 판단</span></div>
+    <div class="vpanel"><div class="vdetail">
+      <div class="vconc"><b>조건부 성립.</b> 퍼스트 앤서는 “모두 참이면 커진다”지만, 검증 결과 8개의 무게가 다르다. <b>상방 엔진 3개(KQ1·2·4)</b>가 포지션을 밀고, <b>브레이크 2개(KQ3·5)</b>가 실재하며, 나머지 3개(KQ6·7·8)는 영향이 작다.</div>
+      <div class="vsub">진영별 정리</div>
+      <table class="vtab">
+        <tr><th>진영</th><th>키퀘스천</th><th>상태</th></tr>
+        <tr><td>상방 엔진</td><td>KQ1 HBM 사이클 · KQ2 HBM4 점유율 · KQ4 매크로·유동성</td><td class="mid">강하나 KQ1·2는 검증 필요</td></tr>
+        <tr><td>브레이크</td><td>KQ3 주가 선행 하락 · KQ5 밸류 상단</td><td class="risk">실재하는 하방</td></tr>
+        <tr><td>보조</td><td>KQ6 촉매 · KQ7 파운드리 · KQ8 CXMT</td><td class="ok">영향 작음</td></tr>
+      </table>
+      <div class="vjudge"><b>관건 —</b> “<b>이익의 절대 상방(KQ1·2)</b>이 <b>주가의 선행 하락(KQ3)</b>을 이기느냐”로 압축된다. 여기에 <b>명목·유동성(KQ4)</b>이 하방을 받치는 안전판. 밸류 재평가(KQ5·6)는 기대하기 어려우므로 상승 동력은 <b>이익 한 축</b>에 집중된다.</div>
+      <div class="vjudge" style="margin-top:10px;"><b>먼저 검증 —</b> KQ1 → KQ2 → KQ4 → KQ3 (영향도 × 불확실성 순).</div>
+
+      <div class="vsub">2028까지 체크리스트</div>
+      <table class="vtab">
+        <tr><th>추적 지표 (KQ)</th><th class="ok">청신호 = 포지션 유지</th><th class="risk">적신호 = 재검토</th></tr>
+        <tr><td>캐펙스·재고 (KQ1)</td><td>하이퍼스케일러 캐펙스 가이던스 상향, 재고 5주 이내</td><td>1곳이라도 캐펙스 하향, 재고 10주 초과</td></tr>
+        <tr><td>HBM4 점유율 (KQ2)</td><td>엔비디아 HBM4 최종 퀄 통과, 분기 점유율 반등</td><td>퀄 지연, 3위 고착·마이크론에 계속 밀림</td></tr>
+        <tr><td>주가 vs 실적 (KQ3)</td><td>실적 서프라이즈에 주가가 반응</td><td>사상 최대 실적에도 주가 하락 지속</td></tr>
+        <tr><td>환율·수급 (KQ4)</td><td>원화 약세, 외국인·패시브 순매수</td><td>원화 강세, 외국인 순매도 전환</td></tr>
+        <tr><td>밸류에이션 (KQ5)</td><td>Forward PER 5~7배 유지</td><td>PER 급등(추가 상승 여력 소진)</td></tr>
+      </table>
+      <div class="vjudge" style="margin-top:14px;"><b>핵심 체크포인트 —</b> 분기 <b>실적 시즌</b>, 특히 하이퍼스케일러 <b>캐펙스 가이던스</b>가 진짜 분기점이다. 가격·재고는 후행 지표라 꺾이면 이미 늦다 — <b>선행 킬 스위치는 캐펙스 하나</b>. 적신호가 <b>2개 이상 동시 점등</b>되면 포지션을 재검토한다.</div>
+    </div></div>
+  </div>
+
+</div>
+
+<script>
+  function toggleV(btn){ btn.parentElement.classList.toggle("open"); }
+</script>
+</body>
+</html>
