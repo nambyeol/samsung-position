@@ -16,6 +16,7 @@
     background:var(--bg);color:var(--ink);letter-spacing:-.01em;
     font-family:"Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,sans-serif;
     -webkit-font-smoothing:antialiased;padding:56px 20px;
+    -webkit-text-size-adjust:100%;text-size-adjust:100%;word-break:keep-all;
   }
   .doc{max-width:840px;margin:0 auto;background:var(--paper);padding:66px 68px 74px;
        box-shadow:0 12px 40px rgba(0,0,0,.08);border:1px solid #ececea;}
@@ -124,6 +125,11 @@
     .vtab{font-size:12px;}
     .vtab th,.vtab td{padding:6px 7px;}
     .vtab td:first-child{white-space:normal;}
+    .vtab.wide{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .vtab.wide th,.vtab.wide td{min-width:132px;}
+    .vtab.wide td:first-child,.vtab.wide th:first-child{min-width:96px;}
+    .vbtn{width:100%;padding:11px 0;font-size:12px;}
+    .verify.open .vpanel{max-height:none;}
     .vscen li{font-size:12.5px;}
     .vjudge,.vrisk{font-size:13px;}
     .close{padding:18px 16px;}
@@ -406,8 +412,8 @@
       </table>
       <div class="vsrc">현재가 272,750원(2026-07-09) 기준 · 목표가 밴드 21만~85만원</div>
 
-      <div class="vsub">2028까지 체크리스트</div>
-      <table class="vtab">
+      <div class="vsub">2028까지 체크리스트 <span style="font-weight:500;letter-spacing:0;text-transform:none;">(모바일: 옆으로 밀어서 보기)</span></div>
+      <table class="vtab wide">
         <tr><th>추적 지표 (KQ)</th><th class="ok">청신호 = 포지션 유지</th><th class="risk">적신호 = 재검토</th></tr>
         <tr><td>캐펙스·재고 (KQ1)</td><td>하이퍼스케일러 캐펙스 가이던스 상향, 재고 5주 이내</td><td>1곳이라도 캐펙스 하향, 재고 10주 초과</td></tr>
         <tr><td>HBM4 점유율 (KQ2)</td><td>엔비디아 HBM4 최종 퀄 통과, 분기 점유율 반등</td><td>퀄 지연, 3위 고착·마이크론에 계속 밀림</td></tr>
